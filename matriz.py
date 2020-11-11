@@ -1,6 +1,7 @@
 def autores():
-    print("Programa hecho por Calderon Romero Alberto Arphaxad y")
-    print("Rios Serrano Asis Gamaliel")
+    print("Programa hecho por Calderon Romero Alberto Arphaxad,")
+    print("Rios Serrano Asis Gamaliel y")
+    print("Vergara Lorenzo Santiago Alonso")
 
 class Matriz:
     def __init__(self, filas, columnas, valor=0):
@@ -29,7 +30,7 @@ class Matriz:
             for j in range(self.columnas):
                 self.matriz[i][j] = num
 
-
+autores()
 a = Matriz(3, 3)
 a.rellenarMatrizDados()
 print(a)
