@@ -1,3 +1,6 @@
+def Autores:
+    print("Programa hecho por Calderon Romero Alberto Arphaxad y")
+
 class Matriz:
     def __init__(self, filas, columnas, valor=0):
         self.filas = filas
