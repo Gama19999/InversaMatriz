@@ -1,5 +1,6 @@
-def Autores:
+def autores():
     print("Programa hecho por Calderon Romero Alberto Arphaxad y")
+    print("Rios Serrano Asis Gamaliel")
 
 class Matriz:
     def __init__(self, filas, columnas, valor=0):
