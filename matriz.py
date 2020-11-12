@@ -1,7 +1,9 @@
 def autores():
-    print("Programa hecho por Calderon Romero Alberto Arphaxad,")
+    print()
+    print("Programa hecho por Vergara Lorenzo Santiago Alonso")
     print("Rios Serrano Asis Gamaliel y")
-    print("Vergara Lorenzo Santiago Alonso")
+    print("Calderon Romero Alberto Arphaxad,")
+
 
 class Matriz:
     def __init__(self, filas, columnas, valor=0):
