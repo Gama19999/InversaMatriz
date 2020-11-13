@@ -52,10 +52,43 @@ class Matriz:
         else:
             return "-"
 
+    def obtenerDeterminante(self):
+        acumSumas1 = 0
+        acumSumas2 = 0
+        auxIterador = 0
+        if tamaño == 2:
+            determinante = (self.matriz[0][0] * self.matriz[1][1]) - (self.matriz[1][0] * self.matriz[0][1])
+            print(f"El determinante de la matriz es {determinante}")
+        elif tamaño == 3:
+            self.matriz.append(self.matriz[0])
+            self.matriz.append(self.matriz[1])
+            for j in range(3):
+                acumMulti1 = 1
+                for i in range(j, j+3):
+                    acumMulti1 *= self.matriz[i][j]
+                acumSumas1 += acumMulti1
+
+            for k in range(2,0,-1):
+                acumMulti2 = 1
+                for l in range(auxIterador, auxIterador+2):
+                    acumMulti2 *= self.matriz[l][k]
+                auxIterador += 1
+                acumSumas2 += acumMulti2
+
+            print(f"El determinante de la matriz es {acumSumas1 - acumSumas2}")
+                
+
+        else:
+            print("Con ese tamaño no podemos hacer este metodo, una disculpa")
+
+
 autores()
 tamaño = int(input("Tamaño de la matriz: "))
 a = Matriz(tamaño, tamaño)
 a.rellenarMatrizEspecifico(5)
+
 print(a)
 print(a.signos())
 print(a.possigno())
+
+a.obtenerDeterminante()
