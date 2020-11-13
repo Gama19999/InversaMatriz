@@ -44,9 +44,18 @@ class Matriz:
             cadena += "]\n"
         return cadena
 
+    def possigno(self):
+        posf = int(input("Posicion fila ")) - 1
+        posc = int(input("Posicion columna ")) - 1
+        if (posf + posc % 2) == 0:
+            return "+"
+        else:
+            return "-"
+
 autores()
 tamaño = int(input("Tamaño de la matriz: "))
 a = Matriz(tamaño, tamaño)
 a.rellenarMatrizEspecifico(5)
 print(a)
 print(a.signos())
+print(a.possigno())
