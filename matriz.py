@@ -32,7 +32,21 @@ class Matriz:
             for j in range(self.columnas):
                 self.matriz[i][j] = num
 
+    def signos(self):
+        cadena = ""
+        for i in range(self.filas):
+            cadena += "["
+            for j in range(self.columnas):
+                if (i + j + 2) % 2 == 0:
+                    cadena += '+ ' 
+                else:
+                    cadena += '- '
+            cadena += "]\n"
+        return cadena
+
 autores()
-a = Matriz(3, 3)
-a.rellenarMatrizDados()
+tamaño = int(input("Tamaño de la matriz: "))
+a = Matriz(tamaño, tamaño)
+a.rellenarMatrizEspecifico(5)
 print(a)
+print(a.signos())
