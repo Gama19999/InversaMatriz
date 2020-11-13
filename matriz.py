@@ -47,7 +47,7 @@ class Matriz:
     def possigno(self):
         posf = int(input("Posicion fila ")) - 1
         posc = int(input("Posicion columna ")) - 1
-        if (posf + posc % 2) == 0:
+        if ((posf + posc) % 2) == 0:
             return "+"
         else:
             return "-"
