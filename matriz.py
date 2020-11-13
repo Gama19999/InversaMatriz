@@ -61,20 +61,22 @@ class Matriz:
         elif tam == 3:
             self.matriz.append(self.matriz[0])
             self.matriz.append(self.matriz[1])
-            print(self.matriz)
 
             for j in range(3):
                 acumMulti1 = 1
                 for i in range(j, j+3):
                     acumMulti1 *= self.matriz[i][i - j]
                 acumSumas1 += acumMulti1
+            print(acumSumas1)
 
             for j in range(3):
                 acumMulti2 = 1
-                for i in range(j + 2, j, -1):
-                    acumMulti2 *= self.matriz[i][i - j]
+                for i in range(j + 2, j - 1, -1):
+                    acumMulti2 *= self.matriz[i][j + 2 - i]
                 acumSumas2 += acumMulti2
+            print(acumSumas2)
             print(f"El determinante de la matriz es {acumSumas1 - acumSumas2}")
+            
         else:
             print("Con ese tamaño no podemos hacer este metodo, una disculpa")
 
