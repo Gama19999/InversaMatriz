@@ -9,11 +9,11 @@ class Matriz:
     def __init__(self, filas, columnas, valor=0):
         self.filas = filas
         self.columnas = columnas
-        self.matriz = [[]]
+        self.matriz = []
         for fila in range(filas):
+            self.matriz.append([])
             for _ in range(columnas):
                 self.matriz[fila].append(valor)
-            self.matriz.append([])
 
     def __str__(self):
         cadena = ''
@@ -55,40 +55,37 @@ class Matriz:
     def obtenerDeterminante(self):
         acumSumas1 = 0
         acumSumas2 = 0
-        auxIterador = 0
-        if tamaño == 2:
+        if tam == 2:
             determinante = (self.matriz[0][0] * self.matriz[1][1]) - (self.matriz[1][0] * self.matriz[0][1])
             print(f"El determinante de la matriz es {determinante}")
-        elif tamaño == 3:
+        elif tam == 3:
             self.matriz.append(self.matriz[0])
             self.matriz.append(self.matriz[1])
+            print(self.matriz)
+
             for j in range(3):
                 acumMulti1 = 1
                 for i in range(j, j+3):
-                    acumMulti1 *= self.matriz[i][j]
+                    acumMulti1 *= self.matriz[i][i - j]
                 acumSumas1 += acumMulti1
 
-            for k in range(2,0,-1):
+            for j in range(3):
                 acumMulti2 = 1
-                for l in range(auxIterador, auxIterador+2):
-                    acumMulti2 *= self.matriz[l][k]
-                auxIterador += 1
+                for i in range(j + 2, j, -1):
+                    acumMulti2 *= self.matriz[i][i - j]
                 acumSumas2 += acumMulti2
-
             print(f"El determinante de la matriz es {acumSumas1 - acumSumas2}")
-                
-
         else:
             print("Con ese tamaño no podemos hacer este metodo, una disculpa")
 
 
 autores()
-tamaño = int(input("Tamaño de la matriz: "))
-a = Matriz(tamaño, tamaño)
-a.rellenarMatrizEspecifico(5)
+tam = int(input("Tamaño de la matriz: "))
+a = Matriz(tam, tam)
+a.rellenarMatrizDados()
 
 print(a)
-print(a.signos())
-print(a.possigno())
+# print(a.signos())
+# print(a.possigno())
 
 a.obtenerDeterminante()
