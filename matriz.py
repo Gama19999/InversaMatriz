@@ -60,9 +60,11 @@ class Matriz:
     def obtenerDeterminante(self):
         acumSumas1 = 0
         acumSumas2 = 0
+        determinante = 0
         if self.filas == 2:
             determinante = (self.matriz[0][0] * self.matriz[1][1]) - (self.matriz[1][0] * self.matriz[0][1])
-            print(f"El determinante de la matriz es {determinante}")
+            # print(f"El determinante de la matriz es {determinante}")
+            return determinante
         elif self.filas == 3:
             self.matriz.append(self.matriz[0])
             self.matriz.append(self.matriz[1])
@@ -72,16 +74,14 @@ class Matriz:
                 for i in range(j, j+3):
                     acumMulti1 *= self.matriz[i][i - j]
                 acumSumas1 += acumMulti1
-            print(acumSumas1)
-
             for j in range(3):
                 acumMulti2 = 1
                 for i in range(j + 2, j - 1, -1):
                     acumMulti2 *= self.matriz[i][j + 2 - i]
                 acumSumas2 += acumMulti2
-            print(acumSumas2)
-            print(f"El determinante de la matriz es {acumSumas1 - acumSumas2}")
-            
+            determinante = acumSumas1 - acumSumas2
+            # print(f"El determinante de la matriz es {determinante}")
+            return determinante
         else:
             print("Con ese tamaño no podemos hacer este metodo, una disculpa")
 
@@ -89,7 +89,7 @@ class Matriz:
         lisCeros = []
         lisPivotes = []
         lisObjetos = []
-        acumSumas = 0;
+        acumSumas = 0
         for i in range(self.filas):
             lisCeros.append(0)
             for j in range(self.columnas):
@@ -97,20 +97,28 @@ class Matriz:
                     lisCeros[i] += 1
 
         filMasCeros = lisCeros.index(max(lisCeros))
+        # print(f"fila con más ceros {filMasCeros}")
 
         for j in range(self.filas):
-            lisPivotes.append(self.matriz[filMasCeros][j] * self.possigno(filMasCeros-1, j-1))
+            valor = self.matriz[filMasCeros][j] * self.possigno(filMasCeros-1, j-1)
+            # print(valor)
+            lisPivotes.append(valor)
 
         for k in range(self.filas):
+            # if lisPivotes[k] == 0:
+              #  continue
             matrizAceptados = []
+            filaActual = -1
             for i in range(self.filas):
                 if i != filMasCeros:
                     matrizAceptados.append([])
+                    filaActual += 1
                     for j in range(self.columnas):
-                        if j != lisPivotes[i]:
-                            matrizAceptados[i].append(self.matriz[i][j])
+                        if j != k:
+                            matrizAceptados[filaActual].append(self.matriz[i][j])
             obj = Matriz(self.filas - 1, self.columnas - 1)
             obj.rellenarConListaDeLista(matrizAceptados)
+            # print(obj)
             lisObjetos.append(obj)
 
         for i in range(len(lisObjetos)):
