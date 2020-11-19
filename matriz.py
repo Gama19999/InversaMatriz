@@ -157,6 +157,13 @@ class Matriz:
         else:
             print("El determinantes de la matriz es 0, no podemos realizar el metodo :(")
 
+    def transpuesta(self, mat):
+        transp = Matriz(mat.columnas, mat.filas)
+        for i in range(len(mat)):
+            for j in range(len(mat[i])):
+                transp[i][j] = mat.matriz[j][i]
+        return transp
+
 
 autores()
 tam = int(input("Tamaño de la matriz: "))
@@ -164,6 +171,7 @@ a = Matriz(tam, tam)
 a.rellenarMatrizDados()
 
 print(a)
+
 # print(a.signos())
 # print(a.possigno())
 
