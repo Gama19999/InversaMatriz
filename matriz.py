@@ -124,7 +124,38 @@ class Matriz:
         for i in range(len(lisObjetos)):
             acumSumas += lisObjetos[i].obtenerDeterminante() * lisPivotes[i]
 
-        print(f"El determinante de la matriz es {acumSumas}")
+        return acumSumas
+
+    def obtenerInversa(self):
+        determinante = self.determinanteLaplace()
+        lisObjetos = []
+        lisDeterminantes = [] #Matriz adjunta
+        auxMatriz = 0
+                
+        if determinante != 0:
+            for i in range(self.filas):
+                for j in range(self.columnas):
+                    obj = Matriz(self.filas - 1, self.columnas - 1)
+                    lisAux1 = []
+                    aux1 = 0
+                    for k in range(self.filas):
+                        if i != k:
+                            lisAux1.append([])
+                            for l in range(self.columnas):
+                                if j != l:
+                                    lisAux1[aux1].append(self.matriz[k][l])
+                            aux1 += 1
+                    obj.rellenarConListaDeLista(lisAux1)
+                    lisObjetos.append(obj)
+        
+            for i in range(self.filas):
+                lisDeterminantes.append([])
+                for j in range(self.columnas):
+                    lisDeterminantes[i].append(lisObjetos[auxMatriz].obtenerDeterminante() * self.possigno(i, j))
+                    auxMatriz += 1
+                    
+        else:
+            print("El determinantes de la matriz es 0, no podemos realizar el metodo :(")
 
 
 autores()
@@ -136,4 +167,4 @@ print(a)
 # print(a.signos())
 # print(a.possigno())
 
-a.determinanteLaplace()
+a.obtenerInversa()
