@@ -100,7 +100,7 @@ class Matriz:
         # print(f"fila con más ceros {filMasCeros}")
 
         for j in range(self.filas):
-            valor = self.matriz[filMasCeros][j] * self.possigno(filMasCeros-1, j-1)
+            valor = self.matriz[filMasCeros][j] * self.possigno(filMasCeros + 1, j + 1)
             # print(valor)
             lisPivotes.append(valor)
 
@@ -151,17 +151,31 @@ class Matriz:
             for i in range(self.filas):
                 lisDeterminantes.append([])
                 for j in range(self.columnas):
-                    lisDeterminantes[i].append(lisObjetos[auxMatriz].obtenerDeterminante() * self.possigno(i, j))
+                    signo = self.possigno(i + 1, j + 1)
+                    deter = lisObjetos[auxMatriz].obtenerDeterminante()
+                    lisDeterminantes[i].append(deter * signo)
                     auxMatriz += 1
-                    
+
+            lisMatrices = Matriz(self.filas, self.columnas)
+            lisMatrices.rellenarConListaDeLista(lisDeterminantes)
+            matTranspuesta = self.transpuesta(lisMatrices)
+
+            matInversa = Matriz(self.filas, self.columnas)
+            for i in range(matTranspuesta.filas):
+                for j in range(matTranspuesta.columnas):
+                    matInversa.matriz[i][j] = matTranspuesta.matriz[i][j] / determinante
+
+            print("La matriz inversa es: ")
+            print(matInversa)
+            return matInversa
         else:
             print("El determinantes de la matriz es 0, no podemos realizar el metodo :(")
 
     def transpuesta(self, mat):
         transp = Matriz(mat.columnas, mat.filas)
-        for i in range(len(mat)):
-            for j in range(len(mat[i])):
-                transp[i][j] = mat.matriz[j][i]
+        for i in range(mat.filas):
+            for j in range(mat.columnas):
+                transp.matriz[i][j] = mat.matriz[j][i]
         return transp
 
 
