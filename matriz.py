@@ -49,26 +49,30 @@ class Matriz:
             cadena += "]\n"
         return cadena
 
-    def possigno(self,posf, posc):
-        #posf = int(input("Posicion fila ")) - 1
-        #posc = int(input("Posicion columna ")) - 1
+    # Método que devuelve el signo que posee cierta posición en la matriz de signos
+    def possigno(self, posf, posc):
+        # posf = int(input("Posicion fila ")) - 1
+        # posc = int(input("Posicion columna ")) - 1
         if ((posf + posc) % 2) == 0:
             return 1
         else:
             return -1
 
+    # Método que obtiene el determinante de la matriz de tamaño 2 y tamaño 3 por método de Sarus
     def obtenerDeterminante(self):
         acumSumas1 = 0
         acumSumas2 = 0
         determinante = 0
-        if self.filas == 2:
+
+        if self.filas == 2:   # Condición para obtener determinante de matriz tamaño 2
             determinante = (self.matriz[0][0] * self.matriz[1][1]) - (self.matriz[1][0] * self.matriz[0][1])
             # print(f"El determinante de la matriz es {determinante}")
             return determinante
-        elif self.filas == 3:
+        elif self.filas == 3:   # Condición para obtener matriz de tamaño 3
             self.matriz.append(self.matriz[0])
             self.matriz.append(self.matriz[1])
 
+            # Proceso que inicia la obtención del determinante
             for j in range(3):
                 acumMulti1 = 1
                 for i in range(j, j+3):
@@ -85,11 +89,14 @@ class Matriz:
         else:
             print("Con ese tamaño no podemos hacer este metodo, una disculpa")
 
+    # Método que obtiene el determiante de la matriz por método Laplace
     def determinanteLaplace(self):
         lisCeros = []
         lisPivotes = []
         lisObjetos = []
         acumSumas = 0
+
+        # Ciclos for que iteran en la matriz para obtener la fila con mayor número de ceros
         for i in range(self.filas):
             lisCeros.append(0)
             for j in range(self.columnas):
@@ -104,9 +111,10 @@ class Matriz:
             # print(valor)
             lisPivotes.append(valor)
 
+        # Proceso que comienza con la obtención de los cofactores para el determinante
         for k in range(self.filas):
             # if lisPivotes[k] == 0:
-              #  continue
+                # continue
             matrizAceptados = []
             filaActual = -1
             for i in range(self.filas):
@@ -126,13 +134,14 @@ class Matriz:
 
         return acumSumas
 
+    # Método que obtiene la matriz inversa de otra matriz utilizando sus cofactores y el método transpuesta
     def obtenerInversa(self):
         determinante = self.determinanteLaplace()
         lisObjetos = []
-        lisDeterminantes = [] #Matriz adjunta
+        lisDeterminantes = []   # Matriz adjunta
         auxMatriz = 0
                 
-        if determinante != 0:
+        if determinante != 0:   # Condición que excluye el método si el determinante es cero
             for i in range(self.filas):
                 for j in range(self.columnas):
                     obj = Matriz(self.filas - 1, self.columnas - 1)
@@ -171,6 +180,7 @@ class Matriz:
         else:
             print("El determinantes de la matriz es 0, no podemos realizar el metodo :(")
 
+    # Método que devuelve la matriz transpuesta de otro objeto matriz
     def transpuesta(self, mat):
         transp = Matriz(mat.columnas, mat.filas)
         for i in range(mat.filas):
